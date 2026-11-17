@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#071224"/>
+      <stop offset="55%" stop-color="#112742"/>
+      <stop offset="100%" stop-color="#1b3a4b"/>
+    </linearGradient>
+    <linearGradient id="mistBand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#90c5c7" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#90c5c7" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#90c5c7" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <!-- Moon -->
+  <circle cx="1180" cy="210" r="56" fill="#e8f3f1" opacity="0.88"/>
+  <circle cx="1180" cy="210" r="135" fill="#77b8b0" opacity="0.12"/>
+  <!-- Far mountain ridge -->
+  <path d="M0 540 L260 350 L510 470 L810 290 L1100 450 L1380 330 L1600 460 L1600 900 L0 900 Z" fill="#132c42"/>
+  <!-- Mist layer 1 -->
+  <rect x="0" y="450" width="1600" height="190" fill="url(#mistBand)"/>
+  <!-- Mid mountain ridge -->
+  <path d="M0 640 L340 430 L640 580 L940 400 L1270 570 L1600 440 L1600 900 L0 900 Z" fill="#0d2233"/>
+  <!-- Mist layer 2 -->
+  <rect x="0" y="570" width="1600" height="170" fill="url(#mistBand)"/>
+  <!-- Near pine ridge -->
+  <path d="M0 730 Q360 650 760 720 T1600 690 L1600 900 L0 900 Z" fill="#071522"/>
+</svg>

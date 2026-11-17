@@ -1,0 +1,8 @@
+{
+  "name": "Sleep Sounds & Relaxing Nature",
+  "description": "Immersive ambient nature soundscapes, multi-track sound mixer, sleep timer, and calming visual environments optimized for Fire TV, Fire Tablets, and Android.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

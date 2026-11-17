@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#081221" />
+  <title>Sleep Sounds &amp; Relaxing Nature</title>
+  <link rel="icon" type="image/svg+xml" href="assets/icons/logo.svg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="ui-tablet">
+  <!-- Ambient Scene Backdrop -->
+  <div id="ambientBackdrop" class="ambient-backdrop" aria-hidden="true">
+    <img id="ambientBackdropImg" src="assets/images/night_forest.jpg" alt="" />
+    <div class="ambient-backdrop-scrim"></div>
+  </div>
+
+  <!-- Main App Shell -->
+  <div id="appShell" class="app-shell">
+    <!-- Adaptive Navigation (Side Rail on Fire TV / Landscape Tablet, Top/Bottom Bar on Portrait) -->
+    <aside id="mainNav" class="main-nav" aria-label="Primary navigation">
+      <div class="nav-brand">
+        <img src="assets/icons/logo.svg" alt="" class="nav-logo" width="40" height="40" />
+        <div class="nav-brand-text">
+          <span class="nav-title" data-i18n="appShortName">Sleep Sounds</span>
+        </div>
+      </div>
+
+      <nav class="nav-items" role="tablist">
+        <button class="nav-btn focusable active" data-view="home" data-nav="true" role="tab" aria-selected="true">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
+          </span>
+          <span class="nav-label" data-i18n="navHome">Home</span>
+        </button>
+
+        <button class="nav-btn focusable" data-view="library" data-nav="true" role="tab" aria-selected="false">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          </span>
+          <span class="nav-label" data-i18n="navLibrary">Library</span>
+        </button>
+
+        <button class="nav-btn focusable" data-view="mixer" data-nav="true" role="tab" aria-selected="false">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+          </span>
+          <span class="nav-label" data-i18n="navMixer">Mixer</span>
+        </button>
+
+        <button class="nav-btn focusable" data-view="timer" data-nav="true" role="tab" aria-selected="false">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5"/><path d="M9 2h6"/></svg>
+          </span>
+          <span class="nav-label" data-i18n="navTimer">Timer</span>
+          <span id="navTimerBadge" class="nav-badge hidden">00:00</span>
+        </button>
+
+        <button class="nav-btn focusable" data-view="scenes" data-nav="true" role="tab" aria-selected="false">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          </span>
+          <span class="nav-label" data-i18n="navScenes">Scenes</span>
+        </button>
+
+        <button class="nav-btn focusable" data-view="settings" data-nav="true" role="tab" aria-selected="false">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.6.85 1 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </span>
+          <span class="nav-label" data-i18n="navSettings">Settings</span>
+        </button>
+      </nav>
+
+      <div class="nav-footer">
+        <button id="navSleepScreenBtn" class="btn-ghost focusable" data-action="sleep-screen">
+          <span class="btn-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+          </span>
+          <span data-i18n="sleepScreen">Sleep Screen</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main id="mainContent" class="main-content">
+      <!-- VIEW 1: HOME -->
+      <section id="view-home" class="view active" aria-labelledby="homeHeroTitle">
+        <div class="hero-card">
+          <img id="homeHeroBg" src="assets/images/night_forest.jpg" alt="" class="hero-bg" />
+          <div class="hero-scrim"></div>
+          <div class="hero-body">
+            <div class="hero-badge-row">
+              <img src="assets/icons/logo.svg" alt="" class="hero-logo" width="44" height="44" />
+              <span class="hero-app-name" data-i18n="appName">Sleep Sounds &amp; Relaxing Nature</span>
+            </div>
+            <h1 id="homeHeroTitle" class="hero-title" data-i18n="welcomeGreeting">Find your calm tonight</h1>
+            <p class="hero-subtitle" data-i18n="welcomeSubtitle">Drift into deep rest with layered nature soundscapes and serene visuals.</p>
+            <div class="hero-actions">
+              <button id="heroPlayBtn" class="btn-primary focusable" data-action="quick-play">
+                <span class="play-glyph" aria-hidden="true">▶</span>
+                <span data-i18n="play">Play</span> · <span id="heroQuickSoundName">Gentle Rain</span>
+              </button>
+              <button id="heroSleepScreenBtn" class="btn-secondary focusable" data-action="sleep-screen">
+                <span data-i18n="sleepScreen">Sleep Screen</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Featured Sounds -->
+        <div class="section-block">
+          <div class="section-header">
+            <h2 class="section-title" data-i18n="featuredSounds">Featured Sounds</h2>
+          </div>
+          <div id="homeFeaturedGrid" class="cards-grid cards-grid-featured"></div>
+        </div>
+
+        <!-- Sound Categories -->
+        <div class="section-block">
+          <div class="section-header">
+            <h2 class="section-title" data-i18n="categoriesTitle">Sound Categories</h2>
+          </div>
+          <div id="homeCategoriesGrid" class="categories-grid"></div>
+        </div>
+
+        <!-- Your Favorites -->
+        <div class="section-block">
+          <div class="section-header">
+            <h2 class="section-title" data-i18n="yourFavorites">Your Favorites</h2>
+          </div>
+          <div id="homeFavoritesGrid" class="cards-grid"></div>
+        </div>
+
+        <!-- Recently Played -->
+        <div class="section-block">
+          <div class="section-header">
+            <h2 class="section-title" data-i18n="recentlyPlayed">Recently Played</h2>
+          </div>
+          <div id="homeRecentGrid" class="cards-grid"></div>
+        </div>
+
+        <!-- Quick Tools -->
+        <div class="section-block">
+          <div class="section-header">
+            <h2 class="section-title" data-i18n="quickActions">Quick Tools</h2>
+          </div>
+          <div class="quick-tools-grid">
+            <button class="tool-card focusable" data-goto="mixer">
+              <div class="tool-icon">🎛️</div>
+              <div class="tool-text">
+                <h3 data-i18n="soundMixer">Sound Mixer</h3>
+                <p data-i18n="soundMixerDesc">Blend multiple nature &amp; sleep tracks</p>
+              </div>
+            </button>
+            <button class="tool-card focusable" data-goto="timer">
+              <div class="tool-icon">⏱️</div>
+              <div class="tool-text">
+                <h3 data-i18n="sleepTimer">Sleep Timer</h3>
+                <p data-i18n="sleepTimerDesc">Auto fade-out when you fall asleep</p>
+              </div>
+            </button>
+            <button class="tool-card focusable" data-action="sleep-screen">
+              <div class="tool-icon">🌙</div>
+              <div class="tool-text">
+                <h3 data-i18n="sleepScreen">Sleep Screen</h3>
+                <p data-i18n="sleepScreenDesc">Full-screen dimmed visual sanctuary</p>
+              </div>
+            </button>
+            <button class="tool-card focusable" data-goto="settings">
+              <div class="tool-icon">⚙️</div>
+              <div class="tool-text">
+                <h3 data-i18n="navSettings">Settings</h3>
+                <p data-i18n="settingsDesc">Language, audio, and display preferences</p>
+              </div>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 2: SOUND LIBRARY -->
+      <section id="view-library" class="view" aria-labelledby="libraryTitle">
+        <div class="view-header">
+          <h1 id="libraryTitle" class="view-title" data-i18n="navLibrary">Library</h1>
+        </div>
+        <div id="libraryTabs" class="filter-tabs" role="tablist">
+          <button class="filter-chip focusable active" data-cat="all" data-i18n="catAll">All Sounds</button>
+          <button class="filter-chip focusable" data-cat="nature" data-i18n="catNature">Nature Sounds</button>
+          <button class="filter-chip focusable" data-cat="sleep" data-i18n="catSleep">Sleep &amp; White Noise</button>
+          <button class="filter-chip focusable" data-cat="fire" data-i18n="catFire">Fire &amp; Cozy Sounds</button>
+          <button class="filter-chip focusable" data-cat="meditation" data-i18n="catMeditation">Meditation &amp; Relaxation</button>
+          <button class="filter-chip focusable" data-cat="favorites" data-i18n="yourFavorites">Your Favorites</button>
+          <button class="filter-chip focusable" data-cat="recent" data-i18n="recentlyPlayed">Recently Played</button>
+        </div>
+        <div id="libraryGrid" class="sound-library-grid"></div>
+      </section>
+
+      <!-- VIEW 3: SOUND MIXER -->
+      <section id="view-mixer" class="view" aria-labelledby="mixerTitle">
+        <div class="view-header">
+          <h1 id="mixerTitle" class="view-title" data-i18n="soundMixer">Sound Mixer</h1>
+        </div>
+
+        <!-- Ready-Made Combinations -->
+        <div class="section-block">
+          <h2 class="section-title" data-i18n="presetMixes">Ready-Made Mixes</h2>
+          <div id="presetMixesGrid" class="presets-grid"></div>
+        </div>
+
+        <!-- Active Mixer Channels + Master Controls -->
+        <div class="section-block panel-card">
+          <div class="mixer-top-row">
+            <h2 class="section-title" data-i18n="activeMixerTracks">Active Mix Channels</h2>
+            <div class="mixer-master-control">
+              <span data-i18n="masterVolume">Master Volume</span>
+              <button class="step-btn focusable" data-master-step="-0.1" aria-label="-">−</button>
+              <input id="mixerMasterSlider" class="range-slider focusable" type="range" min="0" max="1" step="0.02" value="0.75" />
+              <button class="step-btn focusable" data-master-step="0.1" aria-label="+">+</button>
+              <span id="mixerMasterPct" class="pct-label">75%</span>
+            </div>
+          </div>
+
+          <div id="activeMixerList" class="active-mixer-list"></div>
+
+          <form id="saveMixForm" class="save-mix-form">
+            <input id="mixNameInput" type="text" class="text-input focusable" maxlength="40" data-i18n-placeholder="mixNamePlaceholder" placeholder="Enter mix name..." />
+            <button type="submit" class="btn-primary focusable" data-i18n="saveMix">Save Mix</button>
+          </form>
+        </div>
+
+        <!-- Saved Combinations -->
+        <div class="section-block">
+          <h2 class="section-title" data-i18n="savedMixes">Saved Combinations</h2>
+          <div id="savedMixesList" class="saved-mixes-list"></div>
+        </div>
+
+        <!-- Add Sounds to Mix -->
+        <div class="section-block">
+          <h2 class="section-title" data-i18n="addSoundsToMix">Add Sound to Mix</h2>
+          <div id="mixerPickerGrid" class="mixer-picker-grid"></div>
+        </div>
+      </section>
+
+      <!-- VIEW 4: SLEEP TIMER -->
+      <section id="view-timer" class="view" aria-labelledby="timerTitle">
+        <div class="view-header">
+          <h1 id="timerTitle" class="view-title" data-i18n="sleepTimer">Sleep Timer</h1>
+        </div>
+
+        <div class="timer-layout">
+          <div class="panel-card timer-display-card">
+            <div class="timer-ring-wrap">
+              <svg class="timer-ring" viewBox="0 0 200 200" aria-hidden="true">
+                <circle class="timer-ring-track" cx="100" cy="100" r="86" />
+                <circle id="timerRingProgress" class="timer-ring-progress" cx="100" cy="100" r="86" />
+              </svg>
+              <div class="timer-ring-center">
+                <div id="timerCountdownText" class="timer-countdown">00:00</div>
+                <div id="timerStatusText" class="timer-status" data-i18n="sleepTimerDesc">Auto fade-out when you fall asleep</div>
+              </div>
+            </div>
+
+            <div class="timer-action-buttons">
+              <button id="timerPauseResumeBtn" class="btn-primary focusable hidden" data-action="timer-toggle">
+                <span data-i18n="timerPause">Pause</span>
+              </button>
+              <button id="timerCancelBtn" class="btn-secondary focusable hidden" data-action="timer-cancel">
+                <span data-i18n="timerCancel">Cancel</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="panel-card timer-presets-card">
+            <h2 class="section-title" data-i18n="sleepTimer">Sleep Timer</h2>
+            <div id="timerPresetsGrid" class="timer-presets-grid">
+              <button class="timer-preset-btn focusable" data-minutes="5">5 <span data-i18n="minutesShort">min</span></button>
+              <button class="timer-preset-btn focusable" data-minutes="10">10 <span data-i18n="minutesShort">min</span></button>
+              <button class="timer-preset-btn focusable" data-minutes="15">15 <span data-i18n="minutesShort">min</span></button>
+              <button class="timer-preset-btn focusable" data-minutes="30">30 <span data-i18n="minutesShort">min</span></button>
+              <button class="timer-preset-btn focusable" data-minutes="45">45 <span data-i18n="minutesShort">min</span></button>
+              <button class="timer-preset-btn focusable" data-minutes="60">60 <span data-i18n="minutesShort">min</span></button>
+              <button class="timer-preset-btn focusable" data-minutes="90">90 <span data-i18n="minutesShort">min</span></button>
+            </div>
+
+            <div class="custom-timer-row">
+              <label for="customTimerInput" class="field-label" data-i18n="timerCustomMinutes">Custom Minutes</label>
+              <div class="custom-timer-controls">
+                <button id="customTimerMinus" class="step-btn focusable" type="button" aria-label="-5">−5</button>
+                <input id="customTimerInput" class="text-input focusable timer-num-input" type="number" min="1" max="480" value="25" />
+                <button id="customTimerPlus" class="step-btn focusable" type="button" aria-label="+5">+5</button>
+                <button id="customTimerStartBtn" class="btn-primary focusable" type="button" data-i18n="timerStart">Start Timer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 5: VISUAL ENVIRONMENTS -->
+      <section id="view-scenes" class="view" aria-labelledby="scenesTitle">
+        <div class="view-header view-header-row">
+          <h1 id="scenesTitle" class="view-title" data-i18n="visualEnvironments">Visual Environments</h1>
+          <button id="scenesEnterSleepBtn" class="btn-primary focusable" data-action="sleep-screen">
+            <span data-i18n="enterSleepScreen">Enter Sleep Screen</span>
+          </button>
+        </div>
+        <div id="scenesGrid" class="scenes-grid"></div>
+      </section>
+
+      <!-- VIEW 6: SETTINGS -->
+      <section id="view-settings" class="view" aria-labelledby="settingsTitle">
+        <div class="view-header">
+          <h1 id="settingsTitle" class="view-title" data-i18n="settingsTitle">Settings</h1>
+        </div>
+
+        <div class="settings-grid">
+          <!-- Language & Region -->
+          <div class="panel-card settings-card">
+            <h2 class="section-title" data-i18n="languageSection">Language &amp; Region</h2>
+            <div class="setting-row">
+              <label for="languageSelect" class="setting-label" data-i18n="languageLabel">Interface Language</label>
+              <select id="languageSelect" class="select-input focusable">
+                <option value="auto" data-i18n="languageAuto">Automatic (Device Language)</option>
+                <option value="en">English</option>
+                <option value="fr">Français</option>
+                <option value="ar">العربية</option>
+                <option value="es">Español</option>
+                <option value="de">Deutsch</option>
+                <option value="it">Italiano</option>
+                <option value="pt">Português</option>
+                <option value="nl">Nederlands</option>
+                <option value="pl">Polski</option>
+                <option value="ja">日本語</option>
+              </select>
+            </div>
+            <div class="setting-meta">
+              <span data-i18n="detectedLanguageLabel">Detected device language</span>:
+              <strong id="detectedLanguageValue">en</strong>
+            </div>
+          </div>
+
+          <!-- Interface & Display -->
+          <div class="panel-card settings-card">
+            <h2 class="section-title" data-i18n="displaySection">Interface &amp; Display</h2>
+            <div class="setting-row">
+              <label for="uiModeSelect" class="setting-label" data-i18n="uiModeLabel">Interface Layout</label>
+              <select id="uiModeSelect" class="select-input focusable">
+                <option value="auto" data-i18n="uiModeAuto">Auto (Detect TV / Tablet)</option>
+                <option value="tv" data-i18n="uiModeTv">Fire TV (D-Pad 10-Foot UI)</option>
+                <option value="tablet" data-i18n="uiModeTablet">Fire Tablet (Touch UI)</option>
+              </select>
+            </div>
+            <div class="setting-row">
+              <label for="sleepDimnessSlider" class="setting-label">
+                <span data-i18n="sleepDimnessLabel">Sleep Screen Dimness</span>
+                (<span id="sleepDimnessPct">55%</span>)
+              </label>
+              <input id="sleepDimnessSlider" class="range-slider focusable" type="range" min="15" max="90" step="5" value="55" />
+            </div>
+            <div class="setting-row setting-toggle-row">
+              <label for="ambientMotionToggle" class="setting-label" data-i18n="ambientMotionLabel">Subtle Ambient Animations</label>
+              <input id="ambientMotionToggle" type="checkbox" class="toggle-checkbox focusable" checked />
+            </div>
+          </div>
+
+          <!-- Audio Preferences -->
+          <div class="panel-card settings-card">
+            <h2 class="section-title" data-i18n="audioSection">Audio Preferences</h2>
+            <div class="setting-row">
+              <label for="defaultVolumeSlider" class="setting-label">
+                <span data-i18n="defaultVolumeLabel">Default Volume</span>
+                (<span id="defaultVolumePct">75%</span>)
+              </label>
+              <input id="defaultVolumeSlider" class="range-slider focusable" type="range" min="10" max="100" step="5" value="75" />
+            </div>
+            <div class="setting-row setting-toggle-row">
+              <label for="smoothFadesToggle" class="setting-label" data-i18n="smoothFadesLabel">Smooth Fade-In &amp; Fade-Out</label>
+              <input id="smoothFadesToggle" type="checkbox" class="toggle-checkbox focusable" checked />
+            </div>
+            <div class="setting-row setting-toggle-row">
+              <span class="setting-label" data-i18n="resetPrefsLabel">Reset Preferences</span>
+              <button id="resetPrefsBtn" class="btn-secondary focusable" type="button" data-i18n="resetPrefsBtn">Reset</button>
+            </div>
+          </div>
+
+          <!-- Monetization Readiness & App Info -->
+          <div class="panel-card settings-card">
+            <h2 class="section-title" data-i18n="monetizationSection">Edition &amp; Future Upgrades</h2>
+            <div class="edition-box">
+              <h3 data-i18n="editionFreeTitle">Free Edition (Active)</h3>
+              <p data-i18n="editionFreeDesc">Full offline nature sound library, multi-track mixer, and sleep timer with zero audio interruptions.</p>
+            </div>
+            <div class="edition-box edition-box-muted">
+              <h3 data-i18n="editionPremiumTitle">Premium Edition (Planned Architecture)</h3>
+              <p data-i18n="editionPremiumDesc">Prepared for Amazon Appstore IAP: ad-free expansion packs, extended 4K scenes, and custom presets without interrupting active sleep audio.</p>
+            </div>
+          </div>
+
+          <div class="panel-card settings-card">
+            <h2 class="section-title" data-i18n="aboutSection">Application Information</h2>
+            <div class="setting-meta">
+              <span data-i18n="appName">Sleep Sounds &amp; Relaxing Nature</span>
+            </div>
+            <div class="setting-meta">
+              <span data-i18n="appVersionLabel">Version</span>: <strong>1.0.0</strong>
+            </div>
+            <div class="setting-actions">
+              <button id="openPrivacyBtn" class="btn-secondary focusable" type="button" data-i18n="privacyPolicyBtn">Privacy Policy</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Persistent Professional Audio Player Bar -->
+    <footer id="playerBar" class="player-bar" aria-label="Audio player">
+      <div class="player-info">
+        <div id="playerArtWrap" class="player-art">
+          <span id="playerIconGlyph">🌙</span>
+        </div>
+        <div class="player-meta">
+          <div class="player-label-row">
+            <span id="playerModeLabel" class="player-mode-tag" data-i18n="nowPlaying">Now Playing</span>
+            <span id="playerWave" class="wave-bars paused" aria-hidden="true">
+              <i></i><i></i><i></i><i></i>
+            </span>
+          </div>
+          <div id="playerTitle" class="player-title" data-i18n="nothingPlaying">Select a sound or mix to begin</div>
+          <div id="playerProgressWrap" class="player-progress-wrap">
+            <div class="player-progress-track">
+              <div id="playerProgressFill" class="player-progress-fill"></div>
+            </div>
+            <span id="playerElapsedTime" class="player-time">00:00</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="player-controls">
+        <button id="playerPrevBtn" class="icon-btn focusable" type="button" data-i18n-aria="prevSound" aria-label="Previous">⏮</button>
+        <button id="playerPlayPauseBtn" class="play-fab focusable" type="button" data-i18n-aria="play" aria-label="Play">▶</button>
+        <button id="playerStopBtn" class="icon-btn focusable" type="button" data-i18n-aria="stop" aria-label="Stop">⏹</button>
+        <button id="playerNextBtn" class="icon-btn focusable" type="button" data-i18n-aria="nextSound" aria-label="Next">⏭</button>
+        <button id="playerLoopBtn" class="icon-btn focusable active" type="button" data-i18n-aria="loop" aria-label="Loop">🔁</button>
+      </div>
+
+      <div class="player-extras">
+        <div class="player-volume-group">
+          <button id="playerVolDown" class="step-btn focusable" type="button" aria-label="-">−</button>
+          <input id="playerMasterVolume" class="range-slider focusable" type="range" min="0" max="1" step="0.02" value="0.75" aria-label="Volume" />
+          <button id="playerVolUp" class="step-btn focusable" type="button" aria-label="+">+</button>
+        </div>
+        <button id="playerTimerPill" class="pill-btn focusable hidden" type="button" data-goto="timer">
+          ⏱️ <span id="playerTimerText">00:00</span>
+        </button>
+        <button id="playerSleepScreenBtn" class="icon-btn focusable" type="button" data-action="sleep-screen" data-i18n-aria="sleepScreen" aria-label="Sleep Screen">🌙</button>
+      </div>
+    </footer>
+
+    <!-- Fire TV Remote Control Hint Bar (Shown in TV Mode) -->
+    <div id="tvHintBar" class="tv-hint-bar" aria-hidden="true">
+      <span data-i18n="dpadHint">D-Pad: Navigate • OK: Select • Back: Return</span>
+    </div>
+  </div>
+
+  <!-- Dedicated Sleep Screen Mode Overlay -->
+  <div id="sleepScreenOverlay" class="sleep-screen hidden" role="dialog" aria-modal="true" aria-label="Sleep Screen">
+    <img id="sleepScreenImg" src="assets/images/night_forest.jpg" alt="" class="sleep-screen-img" />
+    <div id="sleepScreenDimLayer" class="sleep-screen-dim"></div>
+    <div class="sleep-screen-content">
+      <div class="sleep-screen-top">
+        <div id="sleepClock" class="sleep-clock">22:30</div>
+        <div id="sleepNowPlaying" class="sleep-now-playing"></div>
+        <div id="sleepTimerDisplay" class="sleep-timer-chip hidden"></div>
+      </div>
+
+      <div id="sleepControlsDock" class="sleep-controls-dock">
+        <button id="sleepPlayPauseBtn" class="btn-primary focusable" type="button">⏯</button>
+        <button id="sleepVolDownBtn" class="btn-secondary focusable" type="button">🔉 −</button>
+        <button id="sleepVolUpBtn" class="btn-secondary focusable" type="button">🔊 +</button>
+        <button id="sleepNextSceneBtn" class="btn-secondary focusable" type="button" data-i18n="navScenes">Scenes</button>
+        <button id="sleepExitBtn" class="btn-ghost focusable" type="button" data-i18n="exitSleepScreen">Exit Sleep Screen</button>
+      </div>
+      <div class="sleep-wake-hint" data-i18n="tapToShowControls">Tap or press any key for controls</div>
+    </div>
+  </div>
+
+  <!-- Privacy Policy Modal -->
+  <div id="privacyModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="privacyModalTitle">
+    <div class="modal-card">
+      <h2 id="privacyModalTitle" data-i18n="privacyPolicyTitle">Privacy Policy</h2>
+      <p data-i18n="privacyPolicyBody">Sleep Sounds &amp; Relaxing Nature operates offline without requiring a user account.</p>
+      <div class="modal-actions">
+        <button id="closePrivacyBtn" class="btn-primary focusable" type="button" data-i18n="close">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Discreet Toast Notification -->
+  <div id="toastBanner" class="toast-banner hidden" role="status" aria-live="polite"></div>
+
+  <script src="translations.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
